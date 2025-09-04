@@ -1,7 +1,7 @@
 ﻿using BenchmarkDotNet.Attributes;
 using SecureGate.Api.Services;
 
-namespace Benchmark.Services;
+namespace SecureGate.Benchmark.Services;
 
 public class SimpleServiceBenchmark
 {

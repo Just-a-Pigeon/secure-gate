@@ -12,6 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Source\SecureGate.Api\SecureGate.Api.csproj" />
       <ProjectReference Include="..\Source\SecureGate.Api\SecureGate.Api.csproj" />
     </ItemGroup>
 

@@ -1,6 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using Benchmark.Services;
+using SecureGate.Benchmark.Services;
 using BenchmarkDotNet.Running;
 
 Console.WriteLine("Hello, World!");

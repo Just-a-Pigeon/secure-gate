@@ -18,7 +18,7 @@ public class Register
             .Produces<Guid>();
     }
     
-    private static async Task<IResult> Post(HttpContext context, [FromBody] RegisterRequestDto body)
+    private static IResult Post(HttpContext context, [FromBody] RegisterRequestDto body)
     {
         return TypedResults.NotFound();
     }

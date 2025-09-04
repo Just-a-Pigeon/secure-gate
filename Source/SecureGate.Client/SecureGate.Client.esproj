@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.VisualStudio.JavaScript.Sdk/0.5.302517-alpha">
+    <!-- https://learn.microsoft.com/en-us/visualstudio/javascript/javascript-in-visual-studio?view=vs-2022#project-templates -->
+    <!-- https://learn.microsoft.com/en-us/visualstudio/javascript/javascript-project-system-msbuild-reference?view=vs-2022 -->
+    <PropertyGroup>
+        <ShouldRunNpmInstall>false</ShouldRunNpmInstall>
+        <ShouldRunNpmBuildScript>false</ShouldRunNpmBuildScript>
+        <PreBuildEvent>npm install</PreBuildEvent>
+        <BuildCommand>npm run build</BuildCommand>
+        <StartupCommand>npm run dev</StartupCommand>
+        <TestCommand>npm run test:unit</TestCommand>
+    </PropertyGroup>
+    <ItemGroup>
+        <Script Include="src\Main.ts" />
+        <Script Include="src\vite-env.d.ts" />
+        <Script Include="tsconfig.json" />
+        <Script Include="vite.config.ts" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="src\assets\" />
+      <Folder Include="src\components\" />
+      <Folder Include="src\localization\" />
+      <Folder Include="src\pages\" />
+      <Folder Include="src\router\" />
+      <Folder Include="src\services\" />
+      <Folder Include="src\stores\" />
+      <Folder Include="src\styles\" />
+      <Folder Include="src\types\" />
+      <Folder Include="src\utils\" />
+    </ItemGroup>
+</Project>

@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Models;
 using SecureGate.Api.InternalDto.Auth;
+using SecureGate.Domain.Entities;
 
 namespace SecureGate.Api.Api.Auth;
 
@@ -18,9 +20,11 @@ public class Register
             .Produces<Guid>();
     }
     
-    private static IResult Post(HttpContext context, [FromBody] RegisterRequestDto body)
+    private static async Task<IResult> Post([FromServices] UserManager<ApplicationUser> userManager, HttpContext context, [FromBody] RegisterRequestDto body)
     {
-        return TypedResults.NotFound();
+        var user = new ApplicationUser() { FirstName = body.FirstName, LastName = body.LastName, Email = body.Email };
+        var result = await userManager.CreateAsync(user, body.Password);
+        if (!result.Succeeded) return TypedResults.BadRequest(result.Errors);
+        return TypedResults.Ok();
     }
-
 }

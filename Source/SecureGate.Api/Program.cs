@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SecureGate.Api.Api;
 using SecureGate.Domain.Entities;
 using SecureGate.Repository;
 
@@ -12,10 +13,14 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<SecureGateContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
+    options.UseSnakeCaseNamingConvention();
     options.UseOpenIddict();
 });
 
-builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => { options.User.RequireUniqueEmail = true; })
+builder.Services.AddIdentity<ApplicationUser, IdentityRole<Guid>>(options =>
+    {
+        options.User.RequireUniqueEmail = true;
+    })
     .AddEntityFrameworkStores<SecureGateContext>()
     .AddDefaultTokenProviders();
 
@@ -27,9 +32,11 @@ builder.Services.AddOpenIddict()
     })
     .AddServer(options =>
     {
-        options.SetTokenEndpointUris("/connect/token");
+        options.SetAuthorizationEndpointUris("/connect/authorize")
+            .SetTokenEndpointUris("/connect/token");
         
-        options.AllowAuthorizationCodeFlow().AllowRefreshTokenFlow();
+        options.AllowAuthorizationCodeFlow()
+            .AllowRefreshTokenFlow();
         
         options.AddDevelopmentEncryptionCertificate()
             .AddDevelopmentSigningCertificate();
@@ -51,6 +58,8 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.LogoutPath = "/account/logout";
 });
 
+builder.Services.AddAuthorization();
+
 
 var app = builder.Build();
 
@@ -65,5 +74,5 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 
-app.UseHttpsRedirection();
+app.AddApiEndpoints();
 app.Run();

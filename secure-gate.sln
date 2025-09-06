@@ -9,6 +9,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{42710904-FB2E-41D9-8C73-8D0045A33797}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{21411DA3-DFEB-4495-94FA-4EEBBA2CF573}"
+	ProjectSection(SolutionItems) = preProject
+		Tools\Register.http = Tools\Register.http
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SecureGate.Benchmark", "Tests\SecureGate.Benchmark\SecureGate.Benchmark.csproj", "{EA8258F6-2E59-4272-9B34-3E9BEFDAA0E4}"
 EndProject
